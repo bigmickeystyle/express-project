@@ -1,0 +1,30 @@
+.images {
+    width: 540px;
+    height: 360px;
+}
+
+.imageContainer {
+    overflow: hidden;
+    position: absolute;
+    width: 540px;
+    height: 360px;
+}
+
+#arrow {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 530px;
+    top: 350px;
+    z-index: 2;
+}
+
+
+#bar {
+    height: 360px;
+    width: 10px;
+    z-index: 1;
+    position: absolute;
+    left: 540px;
+    background-image: url('images/rope.jpg')
+}
