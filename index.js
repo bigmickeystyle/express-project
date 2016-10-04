@@ -2,7 +2,32 @@ var express = require('express');
 var app = express();
 var originalurl;
 const projectspage = require('./projectspage.js');
+var projects = projectspage.Obj;
 
+var hb = require('express-handlebars');
+app.engine('handlebars', hb());
+app.set('view engine', 'handlebars');
+
+app.get('/index', function(req, res) {
+    res.render('hello', {
+        layout: 'layout',
+        head: 'head',
+        project: projects.projects,
+        css: 'cssindex.css'
+    });
+});
+
+app.get('/:project/description', function(req, res) {
+    var description = require('./projects/' + req.params.project + '/description.json');
+    res.render('description', {
+        layout: 'layout',
+        title: req.params.project,
+        screenshot: '../projects/' + req.params.project + '/screenshot.png',
+        description: description.description,
+        project: projects.projects,
+        css: '../cssindex.css'
+    });
+});
 
 app.use(function logUrl(req, res, next) {
     res.set('Cache-control', 'no-cache');
@@ -45,6 +70,8 @@ app.get('/', function(req, res){
     res.send(projectspage.Page);
 });
 
+app.use(express.static(__dirname + '/'));
 app.use(express.static(__dirname + '/projects'));
+
 
 app.listen(8080);

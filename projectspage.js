@@ -33,4 +33,5 @@ var template = handlebars.compile(source);
 
 var page = template(obj);
 
+module.exports.Obj = obj;
 module.exports.Page = page;
